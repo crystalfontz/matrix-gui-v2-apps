@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Set 300Mhz
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/power-icon.png
+Type=Application
+Exec=setopp2.sh
+Categories=power
+ProgramType=console

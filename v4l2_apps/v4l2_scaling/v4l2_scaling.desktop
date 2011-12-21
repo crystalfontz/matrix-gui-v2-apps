@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=V4L2 Scaling
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/multimedia-icon.png
+Type=Application
+Exec=runSaScalingDisplay.sh
+Categories=display
+ProgramType=gui
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/v4l2_scaling/desc_v4l2_scaling.html

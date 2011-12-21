@@ -1,0 +1,16 @@
+<h1> Suspend/Resume </h1>
+
+<h2> This program will put the platform into suspend mode.  This script is
+equivalent to the following terminal commands: <br> 
+echo 1 > /debug/pm_debug/sleep_while_idle <br>
+echo 1 > /debug/pm_debug/enable_off_mode <br>
+echo mem > /sys/power/state <br>
+Sleep_while_idle enables the kernel to attempt to reach the retention or off
+state while idle.  Enable_off_mode enables the kernel to transition to off
+mode (deeper sleep state than retention).  The final command initiates the
+suspend.  <br><br>
+IMPORTANT NOTE:  For the system to properly resume, the user must send a
+keypress to the UART.  If the user presses the touchscreen or a button
+on the EVM, resume will not complete normally.  This issue will be fixed in
+a future release.</h2>
+

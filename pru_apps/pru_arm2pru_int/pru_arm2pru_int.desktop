@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=ARM2PRU Int
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/pru-icon.png
+Exec=pru_arm2pru_int.sh
+Type=Application
+Categories=pru
+ProgramType=console
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/pru_arm2pru_int/desc_pru_arm2pru_int.html

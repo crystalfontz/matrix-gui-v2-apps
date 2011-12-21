@@ -1,0 +1,8 @@
+<h1> V4L2 Rotate Example Application </h1>
+
+<p>
+This is an extension of V4L2 display example application. V4L2 IOCTL is used to program the video pipeline with 90 degree and 180 degree rotation. Moving horizontal colorbars are displayed in RGB656 color mode with WQVGA resolution.
+</p>
+<p>
+Rotation is enabled using the hardware rotation engine called Virtual Rotated Frame Buffer (VRFB), VRFB provides four virtual frame buffers: 0, 90, 180 and 270. For statically compiled drivers, VRFB buffer can be declared in the bootloader. In this example, data is displayed through video1 pipeline and "omap_vout.vid1_static_vrfb_alloc=y" bootargument is included in the bootargs.
+</p>

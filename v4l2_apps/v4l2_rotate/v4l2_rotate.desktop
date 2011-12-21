@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=V4L2 Rotate
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/multimedia-icon.png
+Type=Application
+Exec=runSaV4L2Rotation.sh 10000
+Categories=display
+ProgramType=gui
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/v4l2_rotate/desc_v4l2_rotate.html

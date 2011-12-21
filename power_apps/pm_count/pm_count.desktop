@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Power Stats and Active Clocks
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/power-icon.png
+Type=Application
+Exec=pm_count.sh
+Categories=power
+ProgramType=console
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/pm_count/desc_pm_count.html

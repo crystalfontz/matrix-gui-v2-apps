@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Misc Operations
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/pru-icon.png
+Exec=pru_misc_operations.sh
+Type=Application
+Categories=pru
+ProgramType=console
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/pru_misc_operations/desc_pru_misc_operations.html

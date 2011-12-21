@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Timer Int
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/pru-icon.png
+Exec=pru_timer_interrupt.sh
+Type=Application
+Categories=pru
+ProgramType=console
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/pru_timer_interrupt/desc_pru_timer_interrupt.html

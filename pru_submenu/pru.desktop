@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=PRU
+GenericName=PRU
+Icon=/usr/share/matrix-gui-2.0/apps/images/pru-icon.png
+Type=Directory
+X-MATRIX-CategoryTarget=pru
+X-MATRIX-DisplayPriority=1

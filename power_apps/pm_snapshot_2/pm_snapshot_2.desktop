@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=PRCM Snapshot (post resume)
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/power-icon.png
+Type=Application
+Exec=pm_snapshot_2.sh
+Categories=power
+ProgramType=console
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/pm_snapshot_2/desc_pm_snapshot_2.html

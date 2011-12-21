@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=PRCM Register Dump
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/power-icon.png
+Type=Application
+Exec=pm_dump_reg.sh
+Categories=power
+ProgramType=console
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/pm_dump_reg/desc_pm_dump_reg.html

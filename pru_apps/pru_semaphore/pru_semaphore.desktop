@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Semaphore
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/pru-icon.png
+Exec=pru_semaphore.sh
+Type=Application
+Categories=pru
+ProgramType=console
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/pru_semaphore/desc_pru_semaphore.html
