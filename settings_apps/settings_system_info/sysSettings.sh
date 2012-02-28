@@ -39,22 +39,10 @@ echo "-------------------------------------------------------------"
 echo ""
 cat /proc/cpuinfo
 cat /proc/version | awk '{gsub("version","version\t:");print}' | awk '{gsub(" \\(","\n");print}' | awk '{gsub("gcc","GCC");print}' | awk '{gsub(" \\) ","\n");print}'  | awk '{gsub("\\)","");print}' 
-#sgxVer=`(./bin/mem_util 0x48004B48 w 0x2 | ./bin/mem_util 0x48004B10 w 0x1 | ./bin/mem_util 0x48004B00 w 0x2 | ./bin/mem_util 0x50000014 w)`
-sgxVer=`(mem_util 0x48004B48 w 0x2 )`
-sgxVer=`(mem_util 0x48004B10 w 0x1)`
-sgxVer=`(mem_util 0x48004B00 w 0x2)`
-sgxVer=`(mem_util 0x50000014 w)`
-
-ver5=10205
-ver3=10201
-ver2=10003
-
-if [ "$sgxVer" = "$ver5" ]; then
-        echo "SGX Core Version: 5.x"
-elif [ "$sgxVer" = "$ver3" ]; then
-        echo "SGX Core Version: 3.x"
-elif [ "$sgxVer" = "$ver2" ]; then
-        echo "SGX Core Version: 2.x"
+if [ -e /etc/powervr-esrev ]
+then
+        version=`cat /etc/powervr-esrev`
+        echo "SGX Core Version: $version.x"
 else
-        echo "SGX Core Version: Unknown"
+        echo "SGX Core Version: Unknown or Not present"
 fi                                 
