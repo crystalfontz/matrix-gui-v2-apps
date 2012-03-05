@@ -1,0 +1,13 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Name=Color Animation
+GenericName=Demo App
+Icon=/usr/share/matrix-gui-2.0/apps/images/qml-icon.png
+Exec=qmlviewer /usr/bin/qtopia/examples/declarative/animation/basics/color-animation.qml -fullscreen
+Type=Application
+Categories=Qt4
+ProgramType=gui
+X-MATRIX-Lock=qt
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/qml_color_animation/desc_qml_color_animation.html
+
