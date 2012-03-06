@@ -2,7 +2,7 @@
 [Desktop Entry]
 Name=Weather Info
 GenericName=Demo App
-Icon=/usr/share/matrix-gui-2.0/apps/qt4/qt-icon.png
+Icon=/usr/share/matrix-gui-2.0/apps/images/qt-icon.png
 Exec=/usr/bin/qtopia/demos/embedded/weatherinfo/weatherinfo
 Type=Application
 Categories=Qt4
