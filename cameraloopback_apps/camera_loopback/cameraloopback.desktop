@@ -6,5 +6,4 @@ Icon=/usr/share/matrix-gui-2.0/apps/images/multimedia-icon.png
 Type=Application
 Exec=runCameraLoopback.sh
 ProgramType=gui
-X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/cameraloopback/desc_cam_loopback.html
-
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/camera_loopback/desc_cam_loopback.html
