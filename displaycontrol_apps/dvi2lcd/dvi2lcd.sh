@@ -11,8 +11,8 @@ if [ "$default_display" = "dvi" ]; then
 	echo "lcd" > /sys/devices/platform/omapdss/manager0/display
 	echo 1 > /sys/devices/platform/omapdss/display0/enabled
 	echo 1 > /sys/devices/platform/omapdss/overlay0/enabled
-	/usr/bin/matrix-gui-dvi-e stop
-	`/etc/init.d/matrix-gui-e start`
+	matrix-gui-dvi-2.0.sh stop
+	/etc/init.d/matrix-gui-2.0 start
 else
 	echo "LCD display already enabled"
 fi

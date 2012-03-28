@@ -16,8 +16,8 @@ if [ "$default_display" = "lcd" ]; then
 	# By default DVI display timings are configured at VGA resolution
 	echo "27903,720/24/96/96,480/10/32/3" > /sys/devices/platform/omapdss/display2/timings
 	echo 1 > /sys/devices/platform/omapdss/overlay0/enabled
-	/etc/init.d/matrix-gui-e stop
-	`/usr/bin/matrix-gui-dvi-e start`
+	/etc/init.d/matrix-gui-2.0 stop
+	matrix-gui-dvi-2.0.sh start
 else
 	echo "DVI display already enabled"
 fi
