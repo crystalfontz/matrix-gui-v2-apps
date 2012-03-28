@@ -1,9 +1,9 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
-Name=Set 800Mhz
+Name=Set 275Mhz
 GenericName=Demo App
 Icon=/usr/share/matrix-gui-2.0/apps/images/power-icon.png
 Type=Application
-Exec=warnonpm.sh setclock800MHz.sh
+Exec=warnonpm.sh setclock275MHz.sh
 Categories=power
 ProgramType=console

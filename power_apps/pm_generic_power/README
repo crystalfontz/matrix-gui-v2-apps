@@ -1,0 +1,5 @@
+These scripts become part of the matrix-gui-generic-power package and are
+helper scripts used by the various power management applications.
+
+Because there is no .desktop file these applications scripts will not be
+placed in matrix.

@@ -4,6 +4,6 @@ Name=Set 300Mhz
 GenericName=Demo App
 Icon=/usr/share/matrix-gui-2.0/apps/images/power-icon.png
 Type=Application
-Exec=setopp2.sh
+Exec=warnonpm.sh setclock300MHz.sh
 Categories=power
 ProgramType=console

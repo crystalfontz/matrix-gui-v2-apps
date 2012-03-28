@@ -1,8 +1,9 @@
-# Module: memInfo
+# Module: setclock720MHz
 #
-# Description: This script is used to list the memory partition information
+# Description: This script is used to set the clock to 720MHz
 # 
-# Copyright (C) 2010 Texas Instruments Incorporated - http://www.ti.com/
+# Copyright (C) 2010,2011,2012 Texas Instruments Incorporated
+# http://www.ti.com/
 #
 #  Redistribution and use in source and binary forms, with or withou
 #  modification, are permitted provided that the following conditions
@@ -33,16 +34,4 @@
 #  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-#FIXME: file is called setopp4, but sets opp6
-export OPP=6
-
-export OPP_FREQUENCY=$(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies | sed s:\ :\\n:g | sort -r | tail -n$(expr $OPP + 1) | head -n1)
-
-echo $OPP_FREQUENCY > /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed
-
-echo ""
-echo "Set to operating point $OPP: CPU = $(cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq | awk '{print $1 / 1000 " MHz"}')"
-echo ""
-echo ""
-echo "-------------------------------------------------------------"
-cat /proc/cpuinfo
+setclockspeed.sh 720000
