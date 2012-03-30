@@ -41,7 +41,27 @@
 # with a value of 600000 do:
 # ./warnonpm.sh setclockspeed.sh 600000
 
-print_pm_warning() {
+print_pm_bbb_warning() {
+cat << EOM
+ WARNING: There have been reports of system lockups when doing system
+ suspend/resume operations on some beaglebone boards.  This is currently
+ being root caused and the SDK will be updated with suspend/resume support
+ once this has been resolved and suspend/resume works reliably on all
+ beaglebone boards.
+
+ If you wish to test suspend/resume operation on your board you can do so
+ from the serial console command line using the command:
+
+    echo mem > /sys/power/state
+
+ or use the pm_suspend.sh script in the /usb/bin directory.  After the
+ system suspends you can resume the system using the serial console to
+ send any printable character.
+
+EOM
+}
+
+print_pm_cpld_warning() {
 cat << EOM
 
  The version of the CPLD code used on your EVM does not support power
@@ -60,7 +80,7 @@ cat << EOM
             version is required.
     - Update your CPLD software version and the board EEPROM to reflect this
       update.  You can find instructions on how to do this at:
-        <URL HERE>
+        http://processors.wiki.ti.com/index.php/AM335x_General_Purpose_EVM_HW_User_Guide
 
 EOM
 }
@@ -69,17 +89,17 @@ EOM
 # the /var/volatile directory so that they will have to be
 # regenerated on each reboot.  If /var/volatile does not exist then
 # we will have to read the EEPROMs each time.
-eeprom_board="x"
-eeprom_daughtercard="x"
-eeprom_cpld="x"
+eeprom_board="unknown"
+eeprom_daughtercard="unknown"
+eeprom_cpld="unknown"
 get_eeprom_values(){
     # Base EEPROM locations
     base_eeprom="/sys/devices/platform/omap/omap_i2c.1/i2c-1/"
 
-    if [ ! -d $base_eeprom ]
+    if [ ! -e $base_eeprom/1-0050 ]
     then
-        # There was no EEPROM found so we assume this is a board
-        # without a CPLD
+        # There was no EEPROM found to ID the board so bail and leave
+        # the defaults in place
         return 0
     fi
 
@@ -96,6 +116,13 @@ get_eeprom_values(){
         echo "$eeprom_board" > /var/volatile/eeprom_board
     fi
 
+    if [ ! -e $base_eeprom/1-0051 ]
+    then
+        # There was no EEPROM found to ID the daughter board so bail and leave
+        # the defaults in place
+        return 0
+    fi
+
     # The EEPROM on the daughtercard at 1-0051 has the CPLD version in bytes
     # 61-68 and the daughtercard type in bytes 5-12
     # The EEPROM at 1-0051 has the daughtercard name in it in bytes 5-12
@@ -107,7 +134,7 @@ get_eeprom_values(){
     then
         eeprom_daughtercard=`cat /var/volatile/eeprom_daughtercard`
     else
-        eeprom_daughtercard=`head eeprom -c 12 | cut -b 5-12`
+        eeprom_daughtercard=`head eeprom -c 12 2>/dev/null | cut -b 5-12`
         echo "$eeprom_daughtercard" > /var/volatile/eeprom_daughtercard
     fi
 
@@ -116,17 +143,18 @@ get_eeprom_values(){
     then
         eeprom_cpld=`cat /var/volatile/eeprom_cpld`
     else
-        eeprom_cpld=`head eeprom -c 68 | cut -b 61-68`
+        eeprom_cpld=`head eeprom -c 68 2>/dev/null | cut -b 61-68`
         echo "$eeprom_cpld" > /var/volatile/eeprom_cpld
     fi
 }
 
-# Check if the CPLD version is sufficient to allow for PM operations
-# This is only needed for the EVM so also check if this is a beaglebone
-# or not.  The CPLD with the potential to lockup the i2c bus and hang
-# the board during PM operations is only on the general purpose
-# daughter card.
-check_cpld_version() {
+# There are two cases where we want to disable PM features and print a
+# message to the user.
+#   1. On the EVM when the CPLD version is too early to support PM
+#   2. Currenlty on the Beaglebone there is the possibility of a lockup
+#      when doing suspend/resume operations, and we do not want to allow
+#      suspend until this has been root caused.
+check_enable_pm() {
     # Check if we have already marked PM as enabled
     if [ -e /var/volatile/enable_pm ]
     then
@@ -137,10 +165,41 @@ check_cpld_version() {
     # Get the eeprom values
     get_eeprom_values
 
+    check_beaglebone_suspend
+    check_cpld_version
+}
+
+# Check if this is a beaglebone.  If so then check if we are calling the
+# suspend/resume script.  If we are then print a warning for now and exit,
+# else go ahead and allow the operation.  Do not set the enable_pm flag
+# because we want to check the demo being called each time and prevent
+# running the pm_suspend.sh operation.
+check_beaglebone_suspend() {
+    if [ "$eeprom_board" != "A335BONE" ]
+    then
+        # This is NOT a beaglebone so no need to continue
+        return 0
+    fi
+
+    # Check if the pm_suspend demo is being called
+    echo $program | grep pm_suspend > /dev/null
+
+    if [ "$?" = "0" ]
+    then
+        print_pm_bbb_warning
+        exit 1
+    fi
+}
+
+# Check if the CPLD version is sufficient to allow for PM operations
+# This is only needed for the EVM so also check if this is an EVM
+# or not.  The CPLD with the potential to lockup the i2c bus and hang
+# the board during PM operations is only on the general purpose
+# daughter card.
+check_cpld_version() {
     if [ "$eeprom_board" != "A33515BB" ]
     then
-        # This is NOT an EVM
-        touch /var/volatile/enable_pm
+        # This is NOT an EVM so no need to continue
         return 0
     fi
 
@@ -157,7 +216,7 @@ check_cpld_version() {
     if [ "$?" = "1" ]
     then
         echo "INVALID CPLD VERSION FOUND"
-        print_pm_warning
+        print_pm_cpld_warning
         exit 1
     fi
 
@@ -178,7 +237,7 @@ check_cpld_version() {
     then
         # This is a version that is not supported
         echo "FOUND UNSUPPORTED CPLD VERSION ($eeprom_cpld)"
-        print_pm_warning
+        print_pm_cpld_warning
         exit 1
     else
         # This is a supported version
@@ -186,12 +245,15 @@ check_cpld_version() {
     fi
 }
 
+# Get the program being called
+program="$1"
+
 # Get the machine type
 . /etc/init.d/functions
 
 case $(machine_id) in
     am335xevm )
-        check_cpld_version
+        check_enable_pm
         ;;
     * )
         ;;
