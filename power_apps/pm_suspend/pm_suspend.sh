@@ -32,10 +32,29 @@
 #  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 #  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-mkdir /debug
-mount -t debugfs debugfs /debug
-echo 1 > /debug/pm_debug/sleep_while_idle
-echo 1 > /debug/pm_debug/enable_off_mode
+
+if [ ! -d /debug ]
+then
+    mkdir /debug
+fi
+
+mount | grep -e "debugfs.*/debug" > /dev/null 2>&1
+
+if [ "$?" != "0" ]
+then
+    mount -t debugfs debugfs /debug
+fi
+
+if [ -e /debug/pm_debug/sleep_while_idle ]
+then
+    echo 1 > /debug/pm_debug/sleep_while_idle
+fi
+
+if [ -e /debug/pm_debug/enable_off_mode ]
+then
+    echo 1 > /debug/pm_debug/enable_off_mode
+fi
+
 echo mem > /sys/power/state
 echo " "
 echo "Platform has resumed normal operation.  Press Close to continue..."

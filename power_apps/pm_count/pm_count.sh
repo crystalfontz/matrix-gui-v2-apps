@@ -33,8 +33,18 @@
 #  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-mkdir /debug
-mount -t debugfs debugfs /debug
+if [ ! -d /debug ]
+then
+    mkdir /debug
+fi
+
+mount | grep -e "debugfs.*/debug" > /dev/null 2>&1
+
+if [ "$?" != "0" ]
+then
+    mount -t debugfs debugfs /debug
+fi
+
 echo " "
 echo "Power domain state statistics and clock domain active clocks"
 echo " "
