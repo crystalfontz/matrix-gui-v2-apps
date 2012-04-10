@@ -1,16 +1,6 @@
 <h1> Suspend/Resume </h1>
 
-<h2> This program will put the platform into suspend mode.  This script is
-equivalent to the following terminal commands: <br> 
-echo 1 > /debug/pm_debug/sleep_while_idle <br>
-echo 1 > /debug/pm_debug/enable_off_mode <br>
-echo mem > /sys/power/state <br>
-Sleep_while_idle enables the kernel to attempt to reach the retention or off
-state while idle.  Enable_off_mode enables the kernel to transition to off
-mode (deeper sleep state than retention).  The final command initiates the
-suspend.  <br><br>
-IMPORTANT NOTE:  For the system to properly resume, the user must send a
-keypress to the UART.  If the user presses the touchscreen or a button
-on the EVM, resume will not complete normally.  This issue will be fixed in
-a future release.</h2>
+<h2> This program will put the platform into suspend mode using the pm_suspend.sh script.  The display will blank and the network connection will shutdown.  You can wake the system by sending a key press to the serial console or touching the touchscreen.<br><br>
+
+IMPORTANT NOTE:  For some devices the system requires a key press on the serial console in orer to properly resume.  If the user presses the touchscreen or a button on the EVM, resume will not complete normally and the user will still need to send a key press to the serial console.  This issue will be fixed in a future release.  This has currently been observed on the AM37x device.</h2>
 
