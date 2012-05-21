@@ -221,15 +221,15 @@ check_cpld_version() {
     fi
 
     # Now that we know the CPLD has a valid version, check to make sure it
-    # is greater than 1.0D.  To do this we will combine the version with
-    # the 1.0D version, sort the two versions in reverse order, and then
-    # grab the first entry.  If that entry is CPLD1.0D then that means the
+    # is greater than 1.0Z.  To do this we will combine the version with
+    # the 1.0Z version, sort the two versions in reverse order, and then
+    # grab the first entry.  If that entry is CPLD1.0Z then that means the
     # CPLD version we read was:
     #   - Garbage (i.e. not programmed)
-    #   - Less than 1.0D
-    #   - 1.0D as well
+    #   - Less than 1.0Z
+    #   - 1.0Z as well
     # Therefore we want to not do PM operations
-    broken_ver="CPLD1.0D"
+    broken_ver="CPLD1.0Z"
     sorted=`echo -e "$eeprom_cpld""\n""$broken_ver" | sort -r`
     first=`echo $sorted | cut -d ' ' -f1`
 
