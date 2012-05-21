@@ -36,6 +36,6 @@
 echo ""
 echo ""
 echo "From the command line:"
-echo "root@am335x-evm:/boot# opreport"
+echo "root@device:/boot# opreport"
 echo ""
 opreport

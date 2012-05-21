@@ -37,6 +37,6 @@ echo ""
 echo ""
 echo "Limit report values greater than 0.1 % "
 echo "From the command line:"
-echo "root@am335x-evm:/boot# opcontrol -t 0.1"
+echo "root@device:/boot# opcontrol -t 0.1"
 echo ""
 opreport -l -t 0.1
