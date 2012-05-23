@@ -4,6 +4,6 @@ Name=Set 1Ghz
 GenericName=Demo App
 Icon=/usr/share/matrix-gui-2.0/apps/images/power-icon.png
 Type=Application
-Exec=warnonpm.sh setclock1GHz.pm
+Exec=warnonpm.sh setclock1GHz.sh
 Categories=power
 ProgramType=console
