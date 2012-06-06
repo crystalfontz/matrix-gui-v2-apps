@@ -2,7 +2,12 @@
 
 machine_type="`cat /etc/hostname`"
 if [ "$machine_type" = "am335x-evm" ]; then
-	filename="/usr/share/ti/video/HistoryOfTI-WVGA.264"
+        resolution="`fbset | awk '/geometry/ {print $2"x"$3}'`"
+        if [ "$resolution" = "800x480" ]; then
+                filename="/usr/share/ti/video/HistoryOfTI-WVGA.264"
+        elif [ "$resolution" = "480x272" ]; then
+                filename="/usr/share/ti/video/HistoryOfTI-WQVGA.264"
+        fi
 else
 	default_display="`cat /sys/devices/platform/omapdss/manager0/display`"
 	if [ "$default_display" = "dvi" ]; then

@@ -7,7 +7,12 @@ if [ ! -f $amixer_find ]; then
 else
 	machine_type="`cat /etc/hostname`"
 	if [ "$machine_type" = "am335x-evm" ]; then
-		filename="/usr/share/ti/video/HistoryOfTIAV-WVGA.mp4"
+	        resolution="`fbset | awk '/geometry/ {print $2"x"$3}'`"
+	        if [ "$resolution" = "800x480" ]; then
+	                filename="/usr/share/ti/video/HistoryOfTIAV-WVGA.mp4"
+	        elif [ "$resolution" = "480x272" ]; then
+	                filename="/usr/share/ti/video/HistoryOfTIAV-WQVGA.mp4"
+	        fi
 	else
 		default_display="`cat /sys/devices/platform/omapdss/manager0/display`"
 		if [ "$default_display" = "dvi" ]; then
