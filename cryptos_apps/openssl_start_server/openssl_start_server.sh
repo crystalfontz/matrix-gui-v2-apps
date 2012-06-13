@@ -1,6 +1,7 @@
 #!/bin/sh
 
-CERTFILE=/home/root/matrixcert.pem
+CERTFILE=/home/root/certificate.pem
+KEYFILE=/home/root/privatekey.pem
 
 OPENSSL=/usr/bin/openssl
 
@@ -34,4 +35,4 @@ echo
 
 
 
-$OPENSSL s_server -cert $CERTFILE -www >> /dev/NULL &
+$OPENSSL s_server -cert $CERTFILE -key $KEYFILE -www >> /dev/NULL &

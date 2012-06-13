@@ -30,13 +30,19 @@ else
 	exit 1
 fi
 
-lsmod | grep cryptosoft >/dev/null
+
+cat /proc/cpuinfo | grep OMAP3 > /dev/null 2> /dev/null
 if [ `echo $?` = "0" ]
 then
-	echo "Uninstalling cryptosoft module"
-	rmmod cryptosoft
+	export CPU=OMAP3
+else
+	export CPU=other
 fi
 
+
+
+if [ $CPU = "OMAP3" ]
+then
 ls -l /dev/crypto > /dev/null 2> /dev/null
 if [ `echo $?` = "1" ]
 then
@@ -91,7 +97,7 @@ else
 		echo "ocf_omap3_crypto module is already installed"
 	fi
 fi
-
+fi
 
 
 

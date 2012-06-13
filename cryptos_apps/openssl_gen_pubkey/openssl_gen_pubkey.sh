@@ -1,20 +1,20 @@
 #!/bin/sh
 
-CERTFILE=/home/root/matrixcert.pem
+KEYFILE=/home/root/privatekey.pem
 PUBKEY=/home/root/pubkey.pem
 
 
 OPENSSL=/usr/bin/openssl
 
-echo -e "\nGenerating Public Key from ${CERTFILE}"
+echo -e "\nGenerating Public Key from ${KEYFILE}"
 
 
 if [ ! -r $CERTFILE ]
 then
-	echo "Certificate does not exist.  Generate certificate first before generating a public key"
+	echo "Private Key does not exist.  Generate certificate first before generating a public key"
 	exit 1
 else
-	$OPENSSL rsa -in $CERTFILE -pubout > $PUBKEY
+	$OPENSSL rsa -in $KEYFILE -pubout > $PUBKEY
 	echo -e "\nPublic Key written to ${PUBKEY}\n"
 fi
 

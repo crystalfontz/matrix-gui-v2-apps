@@ -7,13 +7,20 @@ OCFMOD=/lib/modules/2.6.37/crypto/ocf/ocf_omap3_cryptok.ko
 
 OPENSSL=/usr/bin/openssl
 
-lsmod | grep cryptosoft >/dev/null
+
+cat /proc/cpuinfo | grep OMAP3 > /dev/null 2> /dev/null
 if [ `echo $?` = "0" ]
 then
-	echo "Uninstalling cryptosoft module"
-	rmmod cryptosoft
+	export CPU=OMAP3
+else
+	export CPU=other
 fi
 
+
+
+
+if [ $CPU = "OMAP3" ]
+then
 ls -l /dev/crypto > /dev/null 2> /dev/null
 if [ `echo $?` = "1" ]
 then
@@ -35,11 +42,11 @@ then
 					if [ `echo $?` = "1" ]
 					then
 						echo "Removing cryptodev.  Running test in SW only mode."
-						rm /dev/crypto
+						rmmod cryptodev
 					fi
 				else
 					echo "Can't find OCF driver.  Running test in SW only mode."
-					rm /dev/crypto
+					rmmod cryptodev
 				fi
 			else
 				echo "ocf_omap3_crypto module is already installed"
@@ -58,20 +65,17 @@ else
 			if [ `echo $?` = "1" ]
 			then
 				echo "Removing cryptodev.  Running test in SW only mode."
-				rm /dev/crypto
+				rmmod cryptodev
 			fi
 		else
 			echo "Can't find OCF driver.  Running test in SW only mode."
-			rm /dev/crypto
+			rmmod cryptodev
 		fi
 	else
 		echo "ocf_omap3_crypto module is already installed"
 	fi
 fi
-
-
-
-
+fi
 
 
 

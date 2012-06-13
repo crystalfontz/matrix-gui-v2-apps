@@ -15,13 +15,6 @@ then
 fi
 
 
-lsmod | grep ocf_omap3_cryptok >/dev/null
-if [ `echo $?` = "0" ]
-then
-	rmmod ocf_omap3_cryptok
-fi
-
-
 $OPENSSL dgst -sha1 $DATAFILE 
 
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CERTFILE=/home/root/matrixcert.pem
+CERTFILE=/home/root/certificate.pem
 
 
 OPENSSL=/usr/bin/openssl
