@@ -4,4 +4,4 @@ Name=Ethernet
 GenericName=Ethernet
 Icon=/usr/share/matrix-gui-2.0/apps/images/network-icon.png
 Type=Directory
-X-MATRIX-CategoryTarget=Ethernet
+X-MATRIX-CategoryTarget=ethernet
