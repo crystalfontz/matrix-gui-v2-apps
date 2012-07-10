@@ -16,7 +16,7 @@ if [ -e "$OGLESDIR/$OGLESAPP" ]
 then
     cd $OGLESDIR
     ./$OGLESAPP $1 | grep -i "error" >/dev/null
-    if [ "$?" != "0" ]
+    if [ "$?" = "0" ]
     then
         echo "Failed to run $OGLESDIR/$OGLESAPP"
         exit 1
