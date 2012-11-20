@@ -10,6 +10,12 @@ else
 
     echo ""
 
+    resolution="`fbset | awk '/geometry/ {print $2"x"$3}'`"
+    if [ "$resolution" = "480x272" ]; then
+           echo "No sound input device is available on this EVM."
+           exit
+    fi
+
     if [ "$machine_type" = "am37x-evm" ]; then
         amixer cset name='HeadsetL Mixer AudioL1' on > /dev/null
         amixer cset name='HeadsetR Mixer AudioR1' on > /dev/null
