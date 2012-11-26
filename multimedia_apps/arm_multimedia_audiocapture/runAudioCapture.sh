@@ -4,6 +4,10 @@ amixer_find="/usr/bin/amixer"
 if [ ! -f $amixer_find ]; then
     echo "amixer not found"
     echo "Please connect audio output and install ALSA soundcard driver"
+    exit
+elif grep -q "no soundcards" /proc/asound/cards; then
+    echo "No sound devices found!"
+    exit
 else
     machine_type="`cat /etc/hostname`"
     filename=$( mktemp )
