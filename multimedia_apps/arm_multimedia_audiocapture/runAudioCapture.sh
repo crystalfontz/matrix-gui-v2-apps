@@ -4,11 +4,21 @@ amixer_find="/usr/bin/amixer"
 if [ ! -f $amixer_find ]; then
     echo "amixer not found"
     echo "Please connect audio output and install ALSA soundcard driver"
+    exit
+elif grep -q "no soundcards" /proc/asound/cards; then
+    echo "No sound devices found!"
+    exit
 else
     machine_type="`cat /etc/hostname`"
     filename=$( mktemp )
 
     echo ""
+
+    resolution="`fbset | awk '/geometry/ {print $2"x"$3}'`"
+    if [ "$resolution" = "480x272" ]; then
+           echo "No sound input device is available on this EVM."
+           exit
+    fi
 
     if [ "$machine_type" = "am37x-evm" ]; then
         amixer cset name='HeadsetL Mixer AudioL1' on > /dev/null
