@@ -38,14 +38,19 @@ echo ""
 echo ""
 echo "Initializing Oprofile"
 echo ""
-if [ -f "`ls /boot/vmlinux*`" ]
+vmlinux_version="/boot/vmlinux-`uname -r`"
+echo $vmlinux_version
+if [ -f "$vmlinux_version" ]
 then
-  echo "running opcontrol --vmlinux=/boot/vmlinux*"
-  opcontrol --vmlinux=`ls /boot/vmlinux*`
+  vmlinux_temp=`echo $vmlinux_version | sed 's/+//'`
+  vmlinux_temp=$vmlinux_temp"_oprofile_copy"
+  if ! [ -f "$vmlinux_temp" ]
+  then
+    ln $vmlinux_version $vmlinux_temp
+  fi
+  echo "running opcontrol --vmlinux=$vmlinux_temp"
+  opcontrol --vmlinux=$vmlinux_temp
 else
-  echo "Error: /boot/vmlinux not found or more than 1 vmlinux file found.
-  If no vmlinux, please generate while building your kernel
-  If more than one, please use:
-     opcontrol --vmlinux=vmlinux-yourVersion
-  to manually to select the correct vmlinux"
+  echo "Error: $vmlinux_version not found
+  please generate a vmlinux while building your kernel and copy it to the /boot directory"
 fi
