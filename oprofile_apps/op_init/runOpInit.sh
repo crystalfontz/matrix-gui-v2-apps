@@ -44,10 +44,11 @@ if [ -f "$vmlinux_version" ]
 then
   vmlinux_temp=`echo $vmlinux_version | sed 's/+//'`
   vmlinux_temp=$vmlinux_temp"_oprofile_copy"
-  if ! [ -f "$vmlinux_temp" ]
+  if [ -f "$vmlinux_temp" ]
   then
-    ln $vmlinux_version $vmlinux_temp
+    rm $vmlinux_temp
   fi
+  ln $vmlinux_version $vmlinux_temp
   echo "running opcontrol --vmlinux=$vmlinux_temp"
   opcontrol --vmlinux=$vmlinux_temp
 else
