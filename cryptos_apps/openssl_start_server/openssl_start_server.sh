@@ -4,7 +4,7 @@ CERTFILE=/home/root/certificate.pem
 KEYFILE=/home/root/privatekey.pem
 
 OPENSSL=/usr/bin/openssl
-
+CERGEN=/usr/bin/Certificate_gen
 
 if [ `pidof openssl` ]
 then
@@ -15,10 +15,11 @@ fi
 echo -e "\nStarting SSL-enabled web server"
 
 
-if [ ! -r $CERTFILE ]
+if [ ! -r $KEYFILE ] || [ ! -r $CERTFILE ]
 then
 	echo "Certificate does not exist.  Generating new certificate before starting server..."
-	/usr/bin/openssl_gen_cert.sh >> /dev/NULL
+	$CERGEN 
+
 fi
 
 echo "Starting server..."
