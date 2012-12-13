@@ -44,43 +44,26 @@
 print_pm_bbb_warning() {
 cat << EOM
  WARNING: There have been reports of system lockups when doing system
- suspend/resume operations on some beaglebone boards.  This is currently
- being root caused and the SDK will be updated with suspend/resume support
- once this has been resolved and suspend/resume works reliably on all
- beaglebone boards.
-
- If you wish to test suspend/resume operation on your board you can do so
- from the serial console command line using the command:
-
-    echo mem > /sys/power/state
-
- or use the pm_suspend.sh script in the /usb/bin directory.  After the
- system suspends you can resume the system using the serial console to
- send any printable character.
-
+          suspend/resume operations on some beaglebone boards.  This is
+          currently being root caused.  If you encounter a lockup you will
+          need to power cycle your EVM.  Once this has been resolved, the
+          SDK will be updated and this message will be removed
 EOM
 }
 
 print_pm_cpld_warning() {
 cat << EOM
 
- The version of the CPLD code used on your EVM does not support power
- management operations.  Although these operations are not available through the
- matrix application launcher, they are supported in the kernel.  If you
- wish to evaluate power management on this EVM you may do so using
- either of the following options:
-    - Use the sysfs attributes from the serial console to access the
-      power management features.  You can find more information on this
-      in the Power Management user's Guide at:
-        http://processors.wiki.ti.com/index.php/Power_Management_Users_Guide
-      NOTE: There is a known issue in older versions of the CPLD code
-            than can cause an i2c bus lockup when doing power management
-            operations.  If you encounter a lockup you will need to
-            power cycle your EVM.  To avoid this lockup, an update of the CPLD
-            version is required.
-    - Update your CPLD software version and the board EEPROM to reflect this
-      update.  You can find instructions on how to do this at:
-        http://processors.wiki.ti.com/index.php/AM335x_General_Purpose_EVM_HW_User_Guide
+ WARNING: There is a known issue in older versions of the CPLD code
+          than can cause an i2c bus lockup when doing power management
+          operations.  If you encounter a lockup you will need to
+          power cycle your EVM.  To avoid this lockup, a future update
+          of the CPLD version is required
+
+  --- When CPLD fix becomes available, you can update your CPLD software
+      version and the board EEPROM to reflect this update.  You can find
+      instructions on how to do this at:
+      http://processors.wiki.ti.com/index.php/AM335x_General_Purpose_EVM_HW_User_Guide
 
 EOM
 }
@@ -187,7 +170,8 @@ check_beaglebone_suspend() {
     if [ "$?" = "0" ]
     then
         print_pm_bbb_warning
-        exit 1
+        #exit 1
+        return 0
     fi
 }
 
@@ -217,7 +201,8 @@ check_cpld_version() {
     then
         echo "INVALID CPLD VERSION FOUND"
         print_pm_cpld_warning
-        exit 1
+        #exit 1
+        return 0
     fi
 
     # Now that we know the CPLD has a valid version, check to make sure it
@@ -238,7 +223,8 @@ check_cpld_version() {
         # This is a version that is not supported
         echo "FOUND UNSUPPORTED CPLD VERSION ($eeprom_cpld)"
         print_pm_cpld_warning
-        exit 1
+        #exit 1
+        return 0
     else
         # This is a supported version
         touch /var/volatile/enable_pm
