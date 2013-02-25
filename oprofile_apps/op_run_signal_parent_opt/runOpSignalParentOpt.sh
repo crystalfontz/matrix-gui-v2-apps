@@ -43,8 +43,8 @@ echo "opcontrol --reset"
 opcontrol --reset
 echo "opcontrol --start"
 opcontrol --start
-echo "The program starts running here, the parent is waiting for a signal
- from the child. In this example the parent is busy waiting."
+echo "The program starts running here, the parent is sleeping, 
+waiting for a signal from the child."
 echo "Execution time 10 seconds "
 signal_parent.opt
 echo "opcontrol --stop"
