@@ -38,11 +38,10 @@ then
     mkdir /debug
 fi
 
-mount | grep -e "debugfs.*/debug" > /dev/null 2>&1
-
-if [ "$?" != "0" ]
+mountpoint /debug > /dev/null 2>&1
+if [ $? -ne 0 ];
 then
-    mount -t debugfs debugfs /debug
+  mount -t debugfs debugfs /debug
 fi
 
 if [ -e /debug/pm_debug/sleep_while_idle ]
