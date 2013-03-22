@@ -8,4 +8,4 @@ Exec=/usr/bin/openssl_aes256_encdec.sh
 Categories=cryptos
 ProgramType=console
 X-MATRIX-LOCK=ssl
-X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/openssl_aes256_encdec/desc_openssl_aes256_encdec.html
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/openssl_aes256_encdec_scripts/desc_openssl_aes256_encdec.html

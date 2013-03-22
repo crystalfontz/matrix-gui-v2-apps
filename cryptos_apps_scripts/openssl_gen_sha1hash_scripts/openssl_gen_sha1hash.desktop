@@ -8,5 +8,5 @@ Exec=/usr/bin/openssl_gen_sha1hash.sh
 Categories=cryptos
 ProgramType=console
 X-MATRIX-LOCK=ssl
-X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/openssl_gen_sha1hash/desc_openssl_gen_sha1hash.html
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/openssl_gen_sha1hash_scripts/desc_openssl_gen_sha1hash.html
 

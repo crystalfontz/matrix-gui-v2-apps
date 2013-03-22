@@ -8,4 +8,4 @@ Exec=/usr/bin/openssl_gen_pubkey.sh
 Categories=cryptos
 ProgramType=console
 X-MATRIX-LOCK=ssl
-X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/openssl_gen_pubkey/desc_openssl_gen_pubkey.html
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/openssl_gen_pubkey_scripts/desc_openssl_gen_pubkey.html

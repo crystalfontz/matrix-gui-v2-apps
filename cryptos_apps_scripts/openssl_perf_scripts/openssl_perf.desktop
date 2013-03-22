@@ -8,4 +8,4 @@ Exec=/usr/bin/openssl_perf.sh
 Categories=cryptos
 ProgramType=console
 X-MATRIX-LOCK=ssl
-X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/openssl_perf/desc_openssl_perf.html
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/openssl_perf_scripts/desc_openssl_perf.html
