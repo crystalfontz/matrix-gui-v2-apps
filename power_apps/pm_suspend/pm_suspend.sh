@@ -33,6 +33,23 @@
 #  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+cat /proc/cpuinfo  | grep am335xevm > /dev/null
+
+if [ `echo $?` = 0 ]
+then
+    cat /proc/driver/musb_hdrc.0 | grep "OTG state" | grep inactive > /dev/null
+
+    if [ `echo $?` = 1 ]
+    then
+        echo "Board is unable to suspend since the USB port is set to device mode."
+        echo "To allow suspend to work you have the following choices:"
+        echo "  Unplug the cable connected to the USB OTG port on the am335x from"
+        echo "  the USB host (machine connected to the am335x via USB)"
+        echo "  Rmmod "g_mass_storage" driver"
+        exit
+    fi
+fi
+
 if [ ! -d /debug ]
 then
     mkdir /debug
@@ -58,7 +75,4 @@ echo mem > /sys/power/state
 echo " "
 echo "Platform has resumed normal operation.  Press Close to continue..."
 echo " "
-
-
-
 
