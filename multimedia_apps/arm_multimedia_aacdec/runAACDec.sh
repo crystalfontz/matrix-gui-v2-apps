@@ -19,6 +19,8 @@ else
 		amixer -c 0 set Headset 1+ unmute
 	elif [ "$machine_type" = "am335x-evm" ]; then
 		amixer cset name='PCM Playback Volume' 127
+	elif [ "$machine_type" = "omap5-evm" ]; then
+		amixer cset name='PCM Playback Volume' 127
 	fi
 	echo ""
 	echo "Length of audio clip: 18 seconds"

@@ -8,6 +8,9 @@ if [ "$machine_type" = "am335x-evm" ]; then
         elif [ "$resolution" = "480x272" ]; then
                 filename="/usr/share/ti/video/HistoryOfTI-WQVGA.264"
         fi
+elif [ "$machine_type" = "omap5-evm" ]
+then
+    filename="/usr/share/ti/video/HistoryOfTI-480p.264"
 else
 	default_display="`cat /sys/devices/platform/omapdss/manager0/display`"
 	if [ "$default_display" = "dvi" ]; then
