@@ -1,9 +1,8 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
-Name=Set 275Mhz
-GenericName=Demo App
+Name=Set Frequency
 Icon=/usr/share/matrix-gui-2.0/apps/images/power-icon.png
+Exec=/html5-apps/power-set-frequency/set-frequency.php
 Type=Application
-Exec=warnonpm.sh setclock275MHz.sh
 Categories=power
-ProgramType=console
+ProgramType=web
