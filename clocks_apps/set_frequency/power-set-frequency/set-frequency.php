@@ -105,10 +105,13 @@ $(".complete_container").delegate("a", "click", function(e)
 
 function update(command)
 	{
-	
-		//This is a fix for IE browsers. IE likes to cache Ajax results. Therefore, adding a random string will prevent the browser from caching the Ajax request. 
+		//This is a fix for IE browsers. IE likes to cache Ajax results. Therefore, adding a random string will prevent the browser from caching the Ajax request.
 		var uri = "/execute-command.php?command="+encodeURIComponent(command);
 	
+		// Adds a random string to the end of the $_GET Query String for page accessed.
+		// This prevents IE from caching the Ajax request.
+		uri = uri + "&rand="+Math.round((Math.random()*2356))+Math.round((Math.random()*4321))+Math.round((Math.random()*3961));
+
 		$.get(uri, function(data) 
 		{
 			fail_count = 0;
