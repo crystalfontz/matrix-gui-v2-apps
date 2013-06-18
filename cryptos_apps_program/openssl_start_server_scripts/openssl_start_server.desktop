@@ -7,4 +7,4 @@ Type=Application
 Exec=/usr/bin/openssl_start_server.sh
 Categories=cryptos
 ProgramType=console
-X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/openssl_start_server_program/desc_openssl_start_server.html
+X-MATRIX-Description=/usr/share/matrix-gui-2.0/apps/openssl_start_server_scripts/desc_openssl_start_server.html
