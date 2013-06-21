@@ -59,9 +59,13 @@ $output = shell_exec('cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available
 $output = trim($output);
 $output = explode (" ",$output);
 
-$current_freq = shell_exec('cat /proc/cpuinfo');
+$current_freq = shell_exec('cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq');
+?>
+<span id = "updated" style = "text-decoration:blink; visibility:hidden;" >Updated </span>Current Frequency: <span id = "current_freq"><?php echo $current_freq/1000 ?> Mhz</span>
+<br>
+<br>
 
-
+<?php
 
 for($i=0;$i<count($output);$i++)
 {
@@ -74,59 +78,54 @@ for($i=0;$i<count($output);$i++)
 	
 }
 
-
-
 ?>
-
-<br><br><br><br>
-<div id = "freq" style = "clear:both;">
-<pre><?php echo $current_freq ?></pre>
-</div>
-</div>
-
-
 
 <script>
 
 
 $(".complete_container").delegate("img", "mousedown", function(e)
 {
-//alert("mousedown");
        e.preventDefault();
 });
 
 $(".complete_container").delegate("a", "click", function(e)
 {
-	//alert("mouseclick");
 	e.preventDefault();
 	e.stopPropagation();
 	update($(this).attr("value"));
 }); 
 
 function update(command)
+{
+	var frequency = command.split(" ")[1];
+	//This is a fix for IE browsers. IE likes to cache Ajax results. Therefore, adding a random string will prevent the browser from caching the Ajax request.
+	var uri = "/execute-command.php?command="+encodeURIComponent(command);
+
+	// Adds a random string to the end of the $_GET Query String for page accessed.
+	// This prevents IE from caching the Ajax request.
+	uri = uri + "&rand="+Math.round((Math.random()*2356))+Math.round((Math.random()*4321))+Math.round((Math.random()*3961));
+
+	$.get(uri, function(data)
 	{
-		//This is a fix for IE browsers. IE likes to cache Ajax results. Therefore, adding a random string will prevent the browser from caching the Ajax request.
-		var uri = "/execute-command.php?command="+encodeURIComponent(command);
-	
-		// Adds a random string to the end of the $_GET Query String for page accessed.
-		// This prevents IE from caching the Ajax request.
-		uri = uri + "&rand="+Math.round((Math.random()*2356))+Math.round((Math.random()*4321))+Math.round((Math.random()*3961));
+		fail_count = 0;
+		$('#updated').css('visibility', 'visible');
+		$('#current_freq').html(frequency/1000 + " Mhz");
+		setTimeout(setInvisible,3000);
+	})
+	//If a file cant be read or some other error related to trying to retrieve this file then JQuery executes the error function.
+	//This sometimes occurs when the browser tries to read the output file before output file is even created.
+	.error(function()
+	{
+		//Might need to handle errors
+	});
 
-		$.get(uri, function(data) 
-		{
-			fail_count = 0;
-			data = jQuery.trim(data);
-			$('#freq').html("<pre>"+data+"</pre>");
-		})
-		//If a file cant be read or some other error related to trying to retrieve this file then JQuery executes the error function.
-		//This sometimes occurs when the browser tries to read the output file before output file is even created. 
-		.error(function() 
-		{ 
-			//Might need to handle errors
-		});
+}
 
-	}
-	
+function setInvisible()
+{
+	$('#updated').css('visibility', 'hidden');
+}
+
 
 
 
