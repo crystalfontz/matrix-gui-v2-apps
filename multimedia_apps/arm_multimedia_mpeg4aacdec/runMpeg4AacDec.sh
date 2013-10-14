@@ -16,6 +16,9 @@ else
     elif [ "$machine_type" = "omap5-evm" ]
     then
         filename="/usr/share/ti/video/HistoryOfTI-480p.m4v"
+    elif [ "$machine_type" = "am437x-evm" ]
+    then
+        filename="/usr/share/ti/video/HistoryOfTI-480p.m4v"
 	else
 		default_display="`cat /sys/devices/platform/omapdss/manager0/display`"
 		if [ "$default_display" = "dvi" ]; then
@@ -39,6 +42,8 @@ else
 	elif [ "$machine_type" = "am335x-evm" ]; then
 		amixer cset name='PCM Playback Volume' 127
     elif [ "$machine_type" = "omap5-evm" ]; then
+		amixer cset name='PCM Playback Volume' 127
+    elif [ "$machine_type" = "am437x-evm" ]; then
 		amixer cset name='PCM Playback Volume' 127
 	fi
 	gst-launch-0.10 filesrc location=$filename ! qtdemux name=demux demux.audio_00 ! faad ! alsasink sync=false demux.video_00 ! queue ! ffdec_mpeg4 ! ffmpegcolorspace ! fbdevsink device=/dev/fb0

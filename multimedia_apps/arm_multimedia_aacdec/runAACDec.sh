@@ -21,6 +21,8 @@ else
 		amixer cset name='PCM Playback Volume' 127
 	elif [ "$machine_type" = "omap5-evm" ]; then
 		amixer cset name='PCM Playback Volume' 127
+	elif [ "$machine_type" = "am437x-evm" ]; then
+		amixer cset name='PCM Playback Volume' 127
 	fi
 	echo ""
 	echo "Length of audio clip: 18 seconds"

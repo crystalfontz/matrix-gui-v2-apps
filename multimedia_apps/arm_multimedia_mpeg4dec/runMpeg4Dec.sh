@@ -11,6 +11,9 @@ if [ "$machine_type" = "am335x-evm" ]; then
 elif [ "$machine_type" = "omap5-evm" ]
 then
     filename="/usr/share/ti/video/HistoryOfTI-480p.m4v"
+elif [ "$machine_type" = "am437x-evm" ]
+then
+    filename="/usr/share/ti/video/HistoryOfTI-480p.m4v"
 else
 	default_display="`cat /sys/devices/platform/omapdss/manager0/display`"
 	if [ "$default_display" = "dvi" ]; then
