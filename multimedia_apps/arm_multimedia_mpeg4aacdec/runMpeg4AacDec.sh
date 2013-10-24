@@ -13,6 +13,9 @@ else
 	        elif [ "$resolution" = "480x272" ]; then
 	                filename="/usr/share/ti/video/HistoryOfTIAV-WQVGA.mp4"
 	        fi
+    elif [ "$machine_type" = "dra7xx-evm" ]
+    then
+	    filename="/usr/share/ti/video/HistoryOfTIAV-WVGA.mp4"
     elif [ "$machine_type" = "omap5-evm" ]
     then
         filename="/usr/share/ti/video/HistoryOfTI-480p.m4v"

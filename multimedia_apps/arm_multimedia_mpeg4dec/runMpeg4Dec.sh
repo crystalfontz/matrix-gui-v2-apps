@@ -8,6 +8,9 @@ if [ "$machine_type" = "am335x-evm" ]; then
 	elif [ "$resolution" = "480x272" ]; then
 		filename="/usr/share/ti/video/HistoryOfTI-WQVGA.m4v"
 	fi
+elif [ "$machine_type" = "dra7xx-evm" ]
+then
+    filename="/usr/share/ti/video/HistoryOfTI-WVGA.m4v"
 elif [ "$machine_type" = "omap5-evm" ]
 then
     filename="/usr/share/ti/video/HistoryOfTI-480p.m4v"
