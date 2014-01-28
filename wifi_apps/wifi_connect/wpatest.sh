@@ -20,7 +20,7 @@ fi
 #start the supplicant in case it is not running already
 wpaAlreadyInstalled=`ps | grep -c wpa_supplicant`
 if [ $wpaAlreadyInstalled -eq 1 ]; then
-	wpa_supplicant -d -Dnl80211 -c/etc/wpa_supplicant.conf -iwlan0 -B
+	wpa_supplicant -d -Dwext,rtl8192cu -c/etc/wpa_supplicant.conf -iwlan0 -B
 	sleep 1
 fi
 #check if udhcpc is already started for wlan0 if it doesnt, start it
