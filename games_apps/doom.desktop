@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Doom
+GenericName=Doom
+Icon=/usr/share/matrix-gui-2.0/apps/images/doom.png
+Exec=load_doom.sh
+Type=Application
+ProgramType=console

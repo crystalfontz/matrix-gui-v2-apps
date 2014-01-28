@@ -1,0 +1,7 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Games
+GenericName=Games
+Icon=/usr/share/matrix-gui-2.0/apps/images/games.png
+Type=Directory
+X-MATRIX-CategoryTarget=games
