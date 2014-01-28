@@ -24,14 +24,14 @@ if [ $wpaAlreadyInstalled -eq 1 ]; then
 	sleep 1
 fi
 #check if udhcpc is already started for wlan0 if it doesnt, start it
-udhcpAlreadyInstalled=`ps | grep -c -E "udhcpc -R -b -p /var/run/udhcpc.wlan0.pid"`
+udhcpAlreadyInstalled=`ps | grep -c -E "udhcpc -R -b -p /run/udhcpc.wlan0.pid"`
 if [ $udhcpAlreadyInstalled -eq 1 ]; then
-	udhcpc -R -b -p /var/run/udhcpc.wlan0.pid -i wlan0
+	udhcpc -R -b -p /run/udhcpc.wlan0.pid -i wlan0
 	sleep 1
 fi
 
-if [ -e /var/volatile/run/wpa_supplicant/wlan0 ]; then
-        $1 -p  /var/volatile/run/wpa_supplicant -i wlan0
+if [ -e /run/wpa_supplicant/wlan0 ]; then
+        $1 -p  /run/wpa_supplicant -i wlan0
 else
         echo "wpa_supplicant not running"
 fi
