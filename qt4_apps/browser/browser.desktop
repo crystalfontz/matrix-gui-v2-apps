@@ -3,6 +3,6 @@
 Name=Browser
 GenericName=Demo App
 Icon=/usr/share/matrix-gui-2.0/apps/images/web-icon.png
-Exec=browser.sh http://www.ti.com
+Exec=browser.sh http://www.crystalfontz.com
 Type=Application
 ProgramType=gui
