@@ -21,6 +21,7 @@ fi
 wpaAlreadyInstalled=`ps | grep -c wpa_supplicant`
 if [ $wpaAlreadyInstalled -eq 1 ]; then
 	wpa_supplicant -d -Dwext,rtl8192cu -c/etc/wpa_supplicant.conf -iwlan0 -B
+	echo "starting wpa_supplicant"
 	sleep 1
 fi
 #check if udhcpc is already started for wlan0 if it doesnt, start it
@@ -30,9 +31,10 @@ if [ $udhcpAlreadyInstalled -eq 1 ]; then
 	sleep 1
 fi
 
-if [ -e /run/wpa_supplicant/wlan0 ]; then
-        $1 -p  /run/wpa_supplicant -i wlan0
-else
-        echo "wpa_supplicant not running"
-fi
+#if [ -e /run/wpa_supplicant/wlan0 ]; then
+#        $1 -p  /run/wpa_supplicant -i wlan0
+#else
+#        echo "wpa_supplicant not running"
+#fi
 
+wpa_gui-e
