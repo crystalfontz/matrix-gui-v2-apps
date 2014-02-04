@@ -4,5 +4,6 @@ Name=Doom
 GenericName=Doom
 Icon=/usr/share/matrix-gui-2.0/apps/images/doom.png
 Exec=load_doom.sh
+Categories=games
 Type=Application
-ProgramType=console
+ProgramType=gui

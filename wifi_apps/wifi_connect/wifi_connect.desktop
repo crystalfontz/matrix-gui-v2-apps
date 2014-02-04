@@ -1,6 +1,6 @@
 #!/usr/bin/env xdg-open
 [Desktop Entry]
-Name=WPA
+Name=Wireless
 GenericName=Demo App
 Icon=/usr/share/matrix-gui-2.0/apps/images/wireless-icon.png
 Type=Application
