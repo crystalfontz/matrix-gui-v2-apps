@@ -5,5 +5,6 @@ GenericName=Demo App
 Icon=/usr/share/matrix-gui-2.0/apps/images/qt-icon.png
 Exec=runCalculator.sh
 Type=Application
-Categories=settings
+Categories=Qt4
 ProgramType=gui
+X-MATRIX-Lock=qt
