@@ -4,6 +4,6 @@ Name=File Manager
 GenericName=NewBreeze
 Icon=/usr/share/matrix-gui-2.0/apps/images/newbreeze-icon.png
 Type=Application
-Exec=newbreeze
+Exec=/usr/bin/newbreeze
 Categories=filemanager
 ProgramType=gui
